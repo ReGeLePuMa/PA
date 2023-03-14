@@ -20,7 +20,22 @@ private:
     double get_result() {
         // TODO: Calculati sqrt(n) cu o precizie de 0.001
         // Precizie de 10^-x = |rezultatul vostru - rezultatul corect| <= 10^-x
-        return 0.0;
+        double l=0.0;
+        double r=(n<1.0) ? (1.0) : (n);
+        double m=(l+r)/2.0;
+        while(fabs(n-m*m)>0.001)
+        {
+            if((n-m*m)>0.001)
+            {
+                l=m;
+            }
+            else if((n-m*m)<-0.001)
+            {
+                r=m;
+            }
+            m=(l+r)/2.0;
+        }
+        return m;
     }
 
     void print_output(double result) {

@@ -17,8 +17,17 @@ private:
         fin.close();
     }
 
-    int fast_pow(int base, int exponent, int mod) {
+    long long fast_pow(int base, int exponent, int mod) {
         // TODO: Calculati (base ^ exponent) % mod in O(log exponent)
+        if(exponent==0)
+        {
+            return (1LL%mod);
+        }
+        if(exponent%2==0)
+        {
+            return 1LL*(((fast_pow(base,exponent/2,mod)%mod)*(fast_pow(base,exponent/2,mod)%mod))%mod);
+        }
+        else return 1LL*(((fast_pow(base,exponent/2,mod)%mod)*(base*fast_pow(base,exponent/2,mod)%mod))%mod);
         return 0;
     }
 

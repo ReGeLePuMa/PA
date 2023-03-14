@@ -16,10 +16,35 @@ private:
         fin >> n >> x >> y;
         fin.close();
     }
-
-    int get_value(int n, int x, int y) {
-        // TODO: Calculati valoarea de pe pozitia (x, y) din matricea de dimensiune 2^n x 2^n
-        return 0;
+    int get_value(int n, int x, int y) 
+    {
+       if(n==1)
+       {
+            if(x==1)
+            {
+                return (y==1) ? (1) : (2);
+            }
+            else return (y==1) ? (3) : (4);
+       }
+       int dim=(1<<n);
+       int cons=(1<<(2*n-2));
+       if(x<=(dim/2) && y<=(dim/2))
+       {
+            return get_value((--n),x,y);
+       }
+       else if(x<=(dim/2) && y>(dim/2))
+       {
+            return cons + get_value((--n),x,(y-(dim/2)));
+       }
+       else if(x>(dim/2) && y<=(dim/2))
+       {
+            return 2*cons + get_value((--n),(x-(dim/2)),y);
+       }
+       else if(x>(dim/2) && y>(dim/2))
+       { 
+            return 3*cons + get_value((--n),(x-(dim/2)),(y-(dim/2)));
+       }
+       else return -1;
     }
 
     int get_result() { return get_value(n, x, y); }
