@@ -23,10 +23,18 @@ private:
     }
 
     int get_result() {
-        // TODO: Aflati numarul minim de opriri necesare pentru a ajunge
-        // la destinatie.
-
-        return 0;
+        sort(dist.begin(),dist.end());
+        int stops=0,rezervor=m-dist[0];
+        for(int i=0;i<dist.size()-1;i++)
+        {
+            if(rezervor-(dist[i+1]-dist[i])<0)
+            {
+                stops++;
+                rezervor=m-(dist[i+1]-dist[i]);
+            }
+            else rezervor-=(dist[i+1]-dist[i]);
+        }
+        return stops;
     }
 
     void print_output(int result) {

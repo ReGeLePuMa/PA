@@ -32,10 +32,19 @@ private:
     }
 
     int get_result() {
-        // TODO: Aflati punctajul maxim pe care il puteti obtine planificand
-        // optim temele.
-
-        return 0;
+        sort(hws.begin(),hws.end(),[](const Homework& a, const Homework& b){ 
+            if(a.deadline==b.deadline)
+            {
+                return a.score>b.score;
+            }
+            else return a.deadline>b.deadline;
+        });
+        int pct=0;
+        for(int i=0;i<hws[0].deadline;i++)
+        {
+            pct+=hws[i].score;
+        }
+        return pct;
     }
 
     void print_output(int result) {

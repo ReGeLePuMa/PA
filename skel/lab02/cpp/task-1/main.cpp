@@ -33,8 +33,24 @@ private:
 
     double get_result() {
         // TODO: Aflati profitul maxim care se poate obtine cu obiectele date.
-
-        return 0.0;
+        sort(objs.begin(),objs.end(),[](const Object& a,const Object& b){ return ((1.0*a.price)/(1.0*a.weight))>((1.0*b.price)/(1.0*b.weight)); });
+        double pret=0;
+        int i=0,weight=0;
+        while(weight<w)
+        {
+            if(weight+objs[i].weight>w)
+            {
+                pret+=((w-weight)*((1.0*objs[i].price)/(1.0*objs[i].weight))); 
+                weight+=(w-weight);
+            }
+            else
+            {
+                pret+=objs[i].price;
+                weight+=objs[i].weight;
+            }
+            i++;
+        }   
+        return pret;
     }
 
     void print_output(double result) {
