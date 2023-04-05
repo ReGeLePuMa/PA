@@ -29,11 +29,26 @@ private:
         fin.close();
     }
 
+
     int get_result() {
         // Calculati numarul de subsiruri ale lui v cu suma numerelor para si
         // returnati restul impartirii numarului la 10^9 + 7 (vezi macro-ul MOD).
-
-        return 0;
+        vector<long long>impar(n+2,0);
+        vector<long long>par(n+2,0);
+        for (int i=2;i<=n+1;i++) 
+        {
+            if (v[i-1]%2==0) 
+            {
+                par[i]=(par[i-1]%MOD+par[i-1]%MOD+1)%MOD;   
+                impar[i]=(impar[i-1]%MOD+impar[i-1]%MOD)%MOD;
+            }
+            else 
+            {
+                par[i]=(par[i-1]%MOD+impar[i-1]%MOD)%MOD;
+                impar[i]=(impar[i-1]%MOD+par[i-1]%MOD+1)%MOD;
+            }
+         }
+        return par[n+1];
     }
 
     void print_output(int result) {
