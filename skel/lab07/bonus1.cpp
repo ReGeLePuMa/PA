@@ -33,17 +33,18 @@ class Task
         fin.close();
     }
 
-    vector<int> get_result()
+    int get_result()
     {
         // TODO: Faceti sortarea topologica a grafului stocat cu liste de
         // adiacenta din adj.
         // *******
         // ATENTIE: nodurile sunt indexate de la 1 la n.
         // *******
-        stack<int> topsort;
         vector<bool> visited(n + 1, false);
+        int nr_conex = 1;
         while (isfalse(visited))
         {
+            ++nr_conex;
             int source = 0;
             for (int i = 1; i <= n; i++)
             {
@@ -55,32 +56,24 @@ class Task
             }
             if (source != 0)
             {
-                dfs(source, visited, topsort);
+                dfs(source, visited);
             }
             else
                 break;
         }
-        vector<int> rez;
-        while (!topsort.empty())
-        {
-            rez.push_back(topsort.top());
-            topsort.pop();
-        }
-        return rez;
+        return nr_conex;
     }
 
-    void dfs(int source, vector<bool>& visited, stack<int>& topsort,
-             int time = 0)
+    void dfs(int source, vector<bool>& visited)
     {
         visited[source] = true;
         for (const auto& i : adj[source])
         {
-            if (!visited[i])
+            if (!visited[source])
             {
-                dfs(i, visited, topsort, ++time);
+                dfs(i, visited);
             }
         }
-        topsort.push(source);
     }
     bool isfalse(const vector<bool>& v)
     {
@@ -94,14 +87,10 @@ class Task
         return false;
     }
 
-    void print_output(const vector<int>& topsort)
+    void print_output(int rez)
     {
         ofstream fout("out");
-        for (auto node : topsort)
-        {
-            fout << node << ' ';
-        }
-        fout << '\n';
+        fout << rez << '\n';
         fout.close();
     }
 };
