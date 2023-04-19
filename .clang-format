@@ -1,16 +1,23 @@
-BasedOnStyle: Webkit
+BasedOnStyle: Google
 
 Language: Cpp
-NamespaceIndentation: None
-SpaceBeforeCpp11BracedList: false
-Cpp11BracedListStyle: true
-SortIncludes: false
-SpaceAfterTemplateKeyword: false
-ColumnLimit: 120
-AlwaysBreakTemplateDeclarations: Yes
-AlignAfterOpenBracket: DontAlign
-BinPackArguments: true
-BreakBeforeBraces: Attach
-AllowAllArgumentsOnNextLine: false
-AllowShortFunctionsOnASingleLine: Inline
-AllowShortLambdasOnASingleLine: Inline
+IndentWidth: 4
+AccessModifierOffset : -3
+
+BreakBeforeBraces: Custom
+BraceWrapping:  
+  AfterClass: true
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterObjCDeclaration: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: true
+  BeforeCatch: true
+  BeforeElse: true
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
