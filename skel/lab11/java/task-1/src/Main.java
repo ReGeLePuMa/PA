@@ -51,7 +51,7 @@ public class Main {
 
             ArrayList<Pair> edges; // muchiile din MST-ul gasit (ordinea nu conteaza)
 
-            MSTResult(int _cost,  ArrayList<Pair> _edges) {
+            MSTResult(int _cost, ArrayList<Pair> _edges) {
                 cost = _cost;
                 edges = _edges;
             }
@@ -61,15 +61,15 @@ public class Main {
         public class DisjointSet {
             // parent[node] = radacina arborelui din care face parte node.
             // (adica identificatorul componentei conexe curente)
-            int [] parent;
+            int[] parent;
 
             // size[node] = numarul de noduri din arborele in care se afla node acum.
-            int [] size;
+            int[] size;
 
             // Se initializeaza n paduri.
             DisjointSet(int nodes) {
                 parent = new int[nodes + 1];
-                size   = new int[nodes + 1];
+                size = new int[nodes + 1];
                 // Fiecare padure contine un nod initial.
                 for (int node = 1; node <= nodes; ++node) {
                     parent[node] = node;
@@ -115,7 +115,7 @@ public class Main {
         private void readInput() {
             try {
                 Scanner sc = new Scanner(new BufferedReader(new FileReader(
-                                INPUT_FILE)));
+                        INPUT_FILE)));
                 n = sc.nextInt();
                 m = sc.nextInt();
 
@@ -151,14 +151,26 @@ public class Main {
             //
             //
             // Vi se da implementarea DisjointSet. Exemple utilizare:
-            //      DisjointSet disjointset = new DisjointSet(n);
-            //      int setX = disjointset.setOf(x);
-            //      ...
-            //      disjointset.union(x, y);
+            // DisjointSet disjointset = new DisjointSet(n);
+            // int setX = disjointset.setOf(x);
+            // ...
+            // disjointset.union(x, y);
             //
             int cost = 0;
             ArrayList<Pair> mst = new ArrayList<>();
-
+            DisjointSet disj = new DisjointSet(n);
+            Collections.sort(edges, new Comparator<Edge>() {
+                public int compare(Edge a, Edge b) {
+                    return ((Integer) a.w).compareTo(b.w);
+                }
+            });
+            for (Edge a : edges) {
+                if (disj.setOf(a.node) != disj.setOf(a.neigh)) {
+                    disj.union(a.node, a.neigh);
+                    cost += a.w;
+                    mst.add(new Pair(a.node, a.neigh));
+                }
+            }
             return new MSTResult(cost, mst);
         }
 

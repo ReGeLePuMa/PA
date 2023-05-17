@@ -16,7 +16,8 @@ private:
         fin >> n >> k;
         fin.close();
     }
-
+    //write a function that gets the sum of n numbers
+    
     vector<vector<int>> get_result() {
         vector<vector<int>> all;
 
@@ -27,7 +28,7 @@ private:
         //     vector<int> aranjament;
         //     all.push_back(aranjament);
 
-        return all;
+        
     }
 
     void print_output(const vector<vector<int>>& result) {
